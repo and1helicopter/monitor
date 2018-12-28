@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers port should handle initial state 1`] = `
+Object {
+  "addr": 1,
+  "baudRate": 115200,
+  "dataBits": 8,
+  "parity": "odd",
+  "port": "COM1",
+  "stopBits": 1,
+}
+`;

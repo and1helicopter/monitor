@@ -1,0 +1,32 @@
+.bottomNavigation{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.bottomNavigationAction{
+    height: 100%;
+    width: 33%;
+}
+.button{
+    height: 10%;
+    width: 25%;
+    font-size: 80%;
+}
+.appBar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 0;
+    /* height: 8%; */
+}
+.mainContent{
+    padding: 2%;
+    padding-bottom: 10%;
+    width: 100%;
+    height: 100%;
+}
+.hamburger{
+    /* margin: 0;
+    padding: 0;
+    color: #fff; */
+}
