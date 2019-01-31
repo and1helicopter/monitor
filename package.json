@@ -1,7 +1,7 @@
 {
   "name": "monitor-app",
   "productName": "Monitor Application",
-  "version": "0.17.1",
+  "version": "0.0.1",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -20,7 +20,8 @@
     "package-all": "yarn build && electron-builder build -mwl",
     "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
     "package-linux": "yarn build && electron-builder build --linux",
-    "package-win": "yarn build && electron-builder build --win --x64",
+    "package-win-x64": "yarn build && electron-builder build --win --x64",
+    "package-win-ia32": "yarn build && electron-builder build --win --ia32",
     "postinstall": "yarn flow-typed && electron-builder install-app-deps package.json && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{*{js,jsx,json},babelrc,eslintrc,prettierrc,stylelintrc}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
@@ -105,9 +106,6 @@
     "email": "and1helicopter@mail.ru"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
-  },
   "keywords": [
     "electron",
     "boilerplate",
@@ -119,9 +117,9 @@
     "hot",
     "reload",
     "material-ui",
-    "modbus"
+    "modbus",
+    "monitor"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -177,13 +175,13 @@
     "cross-spawn": "^6.0.5",
     "css-loader": "^1.0.1",
     "detect-port": "^1.3.0",
-    "electron": "^3.0.10",
-    "electron-builder": "^20.34.0",
+    "electron": "^4.0.3",
+    "electron-builder": "^20.38.5",
     "electron-devtools-installer": "^2.2.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
-    "eslint": "^5.9.0",
+    "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-formatter-pretty": "^2.0.0",
@@ -198,7 +196,7 @@
     "eslint-plugin-testcafe": "^0.2.1",
     "fbjs-scripts": "^1.0.1",
     "file-loader": "^2.0.0",
-    "flow-bin": "^0.77.0",
+    "flow-bin": "^0.91.0",
     "flow-runtime": "^0.17.0",
     "flow-typed": "^2.5.1",
     "husky": "^1.1.4",
@@ -235,32 +233,29 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
-    "@material-ui/core": "^3.6.2",
-    "@material-ui/icons": "^3.0.1",
+    "@material-ui/core": "^3.9.1",
+    "@material-ui/icons": "^3.0.2",
     "devtron": "^1.4.0",
-    "electron-debug": "^2.0.0",
+    "electron-debug": "^2.1.0",
     "electron-log": "^2.2.17",
-    "electron-updater": "^3.2.3",
+    "electron-updater": "^4.0.6",
     "history": "^4.7.2",
-    "modbus-serial": "^7.4.2",
+    "modbus-serial": "^7.5.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.3.12",
     "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-localize-redux": "^3.5.1",
+    "react-translated": "^2.3.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "source-map-support": "^0.5.9"
+    "react-native": "^0.58.3",
+    "redux-thunk": "^2.3.0"
   },
   "devEngines": {
     "node": ">=7.x",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
-  },
-  "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
   },
   "browserslist": "electron 1.6"
 }

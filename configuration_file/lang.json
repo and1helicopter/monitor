@@ -1,0 +1,52 @@
+{
+    "journal": {
+        "en": "Journal",
+        "ru": "Журнал"
+    },
+    "monitor": {
+        "en": "Monitor",
+        "ru": "Монитор"
+    },
+    "settings": {
+        "en": "Settings",
+        "ru": "Параметры"
+    },
+    "Inbox":{
+        "en": "Settings",
+        "ru": "Параметры"
+    },
+    "kV":{
+        "en": "kV",
+        "ru": "кВ"
+    },
+    "value1": 
+    {
+        "en": "Value 1",
+        "ru": "Значение 1"
+    },
+    "value2": 
+    {
+        "en": "Value 2",
+        "ru": "Значение 2"
+    },
+    "first_monitor_window":{
+        "en": "Window 1",
+        "ru": "Окно 1"
+    },
+    "second_monitor_window":{
+        "en": "Window 2",
+        "ru": "Окно 2"
+    },
+    "switchMonitor":{
+        "en": "Switch",
+        "ru": "Сменить"
+    },
+    "status_1":{
+        "en": "Status",
+        "ru": "Статус"
+    },
+    "status_3":{
+        "en": "Status 3333",
+        "ru": "Статус 3333"
+    }
+}  

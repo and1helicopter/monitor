@@ -1,23 +1,42 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
-// import ReactDOM, { render } from 'react-dom';
-import { MuiThemeProvider} from '@material-ui/core/styles';
-import Monitor from './Monitor';
+import { MuiThemeProvider, withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import BottomMenu from '../components/BottomMenu';
 import theme from '../themes/theme';
+import {InitModBusPort, getValueTest} from './ModBus';
 
-type Props = {
-    children: React.Node
+const styles = {
+    root: {
+        height: "500px",
+        background: "#FE6B8B"
+    }
 };
 
-export default class App extends Component<Props>{
-    props: Props;
+class App extends Component<Props>{
+
+    componentWillMount(){
+        InitModBusPort();
+    }
 
     render(){
-        const { children } = this.props;
+        const {classes, children} = this.props;
+
         return(
             <MuiThemeProvider theme={theme}>
                 <React.Fragment>{children}</React.Fragment>
-                <Monitor journal="Журнал" monitor="Монитор" settings="Параметры" />
+                <BottomMenu  />
             </MuiThemeProvider>
         );
     };
 }
+
+App.propTypes = {
+    classes: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
+};
+
+const mapStateToProps = store => ({app: store.app})
+
+export default connect(mapStateToProps)(withStyles(styles)(App))

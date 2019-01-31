@@ -24,11 +24,11 @@ const theme = createMuiTheme({
             light: '#5393ff'
         },
         secondary: {
-            main: '#2979ff',            
-            dark: '#1c54b2',
-            light: '#5393ff'
+            main: '#f50057',            
+            dark: '#ab003c',
+            light: '#f73378'
         },
     },
 });
 
-  export default theme;
+export default theme;

@@ -4,30 +4,9 @@ import thunk from 'redux-thunk';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
-import ModbusRTU  from "modbus-serial";
 import createRootReducer from '../reducers';
 import * as counterActions from '../actions/counter';
 import type { counterStateType } from '../reducers/types';
-
-const client = new ModbusRTU();
-
-// open connection to a serial port
-client.connectRTUBuffered("COM4",{
-    baudRate: 115200,
-    dataBits: 8, /* 5, 6, 7 */
-    stopBits: 1, /* 1.5, 2 */
-    parity: 'odd', /* even, odd, mark, space */
-    },read);
-
-function read() {
-    client.setID(1);
-
-    setInterval( () => {
-      client.readHoldingRegisters(269, 32).then((response) => {
-        console.log(response);
-      }).catch();
-    }, 250);
-}
 
 const history = createHashHistory();
 
@@ -85,8 +64,10 @@ const configureStore = (initialState?: counterStateType) => {
       () => store.replaceReducer(require('../reducers').default)
     );
   }
+  console.log(store.getState())
+  console.log(store.getState().app.lang)
 
   return store;
 };
 
-export default { configureStore, history };
+export default { configureStore, history};

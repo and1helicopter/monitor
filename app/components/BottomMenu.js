@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 // @flow
 import React, { Component } from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -5,13 +6,21 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import MonitorIcon from '@material-ui/icons/DashboardTwoTone';
 import SettingsIcon from '@material-ui/icons/Settings';
-// import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
-// import '../styles/style.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
+import {Provider, Translate} from 'react-translated';
+import { connect } from 'react-redux';
+import classNames from "classnames";
+import { withStyles } from '@material-ui/core/styles';
 
-// import routes from '../constants/routes';
+const styles = {
+    bottomMenu: {
+        bottom: 0,
+        position: "fixed",
+        width: "100%",
+    }
+}
 
 class BottomMenu extends Component{
     constructor(props){
@@ -21,57 +30,68 @@ class BottomMenu extends Component{
             value: 1
         };
         this.handleChange = this.handleChange.bind(this);
-    }
+    };
 
     handleChange(event, value){
         return this.setState({ value });
-    }
-;
+    };
+
     render(){
         const { value } = this.state;
-        // const { params } = this.props;
-
+        const { dictionaty, language, classes } = this.props;
         return(
-        <div>
-            <CssBaseline />
-            <BottomNavigation  
-                color="secondary" 
-                value={value} 
-                onChange={this.handleChange} 
-                showLabels className="bottomNavigation">
-                    <BottomNavigationAction 
-                        component={Link} 
-                        to="/Test"
-                        className="bottomNavigationAction" 
-                        label={this.props.journal}
-                        icon={<RestoreIcon />}
-                    />
-                    <BottomNavigationAction 
-                        component={Link} 
-                        to="/Monitor"
-                        className="bottomNavigationAction" 
-                        label={this.props.monitor} 
-                        icon={<MonitorIcon />}
-                    />
-                    <BottomNavigationAction 
-                        component={Link} 
-                        to="/Test"
-                        className="bottomNavigationAction" 
-                        label={this.props.settings} 
-                        icon={<SettingsIcon />} 
-                    />
-            </BottomNavigation>
-            {/* {if(value === 0) <div> Item</div>} */}
-        </div>);
+            <Provider language={dictionaty.language} translation={language}>
+                {/* <div> */}
+                    <CssBaseline />
+                    <BottomNavigation  
+                        color="secondary" 
+                        value={value} 
+                        onChange={this.handleChange} 
+                        showLabels 
+                        className={classNames(classes.bottomMenu)}
+                    >
+                        <BottomNavigationAction 
+                            component={Link} 
+                            to="/Test"
+                            label={<Translate text="journal" />}
+                            className="bottomNavigationAction" 
+                            icon={<RestoreIcon />}
+                        />                            
+                        <BottomNavigationAction 
+                            component={Link} 
+                            to="/Monitor"
+                            className="bottomNavigationAction" 
+                            label={<Translate text="monitor" />} 
+                            icon={<MonitorIcon />}
+                        />
+                        <BottomNavigationAction 
+                            component={Link} 
+                            to="/SettingsTamplate"
+                            className="bottomNavigationAction" 
+                            label={<Translate text="settings" />} 
+                            icon={<SettingsIcon />} 
+                        />
+                    </BottomNavigation>
+                    {/* {if(value === 0) <div> Item</div>} */}
+                {/* </div> */}
+            </Provider>
+        );
     }
 }
 
-
 BottomMenu.propTypes = {
-    journal: PropTypes.string.isRequired,
-    monitor: PropTypes.string.isRequired,
-    settings: PropTypes.string.isRequired
+    classes: PropTypes.object.isRequired,
+    dictionaty: PropTypes.object.isRequired,
+    language: PropTypes.object.isRequired
 };
+
+const mapStateToProps = store => ({
+    dictionaty: store.app.config,
+    language: store.app.lang
+})
   
-export default (BottomMenu);
+export default connect(mapStateToProps)(withStyles(styles)(BottomMenu));
+
+
+
   
