@@ -24,14 +24,14 @@ const styles =  theme => ({
     }
 })
 
-class SettingsTamplate extends Component{
+class SettingsTemplate extends Component{
     state = {
         button: []
     }
 
     componentWillMount(){
         const itemTemp =  this.props.form.find(formItem => 
-            formItem.tamplate.toLowerCase()=== "settingTamplate".toLowerCase());
+            formItem.template.toLowerCase()=== "settingTemplate".toLowerCase());
         if(itemTemp.item === undefined) return;
         this.setState({button: itemTemp.item});
     }
@@ -51,7 +51,7 @@ class SettingsTamplate extends Component{
                             fullWidth={true} 
                             variant='contained' 
                             component={Link}  
-                            to={`/ContainerForm/${itemButton.name},${itemButton.handler}`}
+                            to={`/ContainerTemplate/${itemButton.name},${itemButton.handler}`}
                         >
                             {<Translate text={itemButton.name}/>}
                         </Button>
@@ -63,7 +63,7 @@ class SettingsTamplate extends Component{
     }
 }
 
-SettingsTamplate.propTypes = {
+SettingsTemplate.propTypes = {
     dictionary: PropTypes.object.isRequired,
     language: PropTypes.object.isRequired,
 };
@@ -78,4 +78,4 @@ const mapStateToProps = store => ({
     form: store.app.form
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SettingsTamplate))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SettingsTemplate))

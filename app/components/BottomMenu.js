@@ -38,9 +38,9 @@ class BottomMenu extends Component{
 
     render(){
         const { value } = this.state;
-        const { dictionaty, language, classes } = this.props;
+        const { dictionary, language, classes } = this.props;
         return(
-            <Provider language={dictionaty.language} translation={language}>
+            <Provider language={dictionary.language} translation={language}>
                 {/* <div> */}
                     <CssBaseline />
                     <BottomNavigation  
@@ -59,14 +59,14 @@ class BottomMenu extends Component{
                         />                            
                         <BottomNavigationAction 
                             component={Link} 
-                            to="/Monitor"
+                            to="/MonitorTemplate"
                             className="bottomNavigationAction" 
                             label={<Translate text="monitor" />} 
                             icon={<MonitorIcon />}
                         />
                         <BottomNavigationAction 
                             component={Link} 
-                            to="/SettingsTamplate"
+                            to="/SettingsTemplate"
                             className="bottomNavigationAction" 
                             label={<Translate text="settings" />} 
                             icon={<SettingsIcon />} 
@@ -81,12 +81,12 @@ class BottomMenu extends Component{
 
 BottomMenu.propTypes = {
     classes: PropTypes.object.isRequired,
-    dictionaty: PropTypes.object.isRequired,
+    dictionary: PropTypes.object.isRequired,
     language: PropTypes.object.isRequired
 };
 
 const mapStateToProps = store => ({
-    dictionaty: store.app.config,
+    dictionary: store.app.config,
     language: store.app.lang
 })
   

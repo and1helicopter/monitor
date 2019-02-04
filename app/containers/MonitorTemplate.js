@@ -6,11 +6,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import StatusMenu from '../components/Monitor/StatusMenu';
-import ToolBar from '../components/Monitor/ToolBar';
-import Content from '../components/Monitor/Content';
+import PropTypes from 'prop-types';
+import StatusMenu from '../components/StatusMenu';
+import ToolBar from '../components/ToolBar';
 import { NEW_MAP, UPDATE_MAP } from '../actions/actions';
 import { getValue } from './ModBus';
+import ViewTemplate from './ViewTemplate';
 
 
 const statusMenuWidthMin = 72;
@@ -18,7 +19,7 @@ const statusMenuWidthMax = 216;
 const bottomMenuHeight = 56;
 
 const styles =  theme => ({
-    contanerOpen:{
+    containerOpen:{
         width: `calc(100% - ${statusMenuWidthMax}px)`,
         height: `calc(100% - ${bottomMenuHeight}px)`,
         marginLeft: `${statusMenuWidthMax}px`,
@@ -30,7 +31,7 @@ const styles =  theme => ({
         "overflow-y": "visible",
 
     },
-    contanerClose:{
+    containerClose:{
         width: `calc(100% - ${statusMenuWidthMin}px)`,
         height: `calc(100% - ${bottomMenuHeight}px)`,
         marginLeft: `${statusMenuWidthMin}px`,
@@ -53,89 +54,93 @@ class Monitor extends Component{
     };
 
     componentWillMount(){
-        // Select menu monitor from store        
-        const menu = this.props.form.find((item) => (item.tamplate === "monitorMenu"));
+        // Select menu monitor from store    
+        const {form, mapInit} = this.props;
+
+        const menu = form.find((item) => (item.template === "monitorMenu"));
+
         this.setState({menu});
         const mapMenu = []
         menu.menu.forEach(itemMenu=>{
             if(itemMenu.isAddr){
                 mapMenu.push({
-                    name: itemMenu.name,
                     addr: Number(itemMenu.addr),
-                    val: 11
+                    val: 0
                 })
             }
         })
         // Select all forms monitor from store
-        const form = this.props.form.filter((item) => (item.tamplate === "monitorData"));
-        this.setState({form});
+        const formTemp = form.filter((item) => (item.template === "monitorData"));
+        console.log("formTemp");
+        console.log(formTemp);
+        this.setState({form: formTemp});
         // Start form monitor
-        const formFirst = form.find((item)=>(item.window_tab === 0));
+        const formFirst = form.find((item)=>(Number(item.window_tab) === 0));
 
         const mapForm = [];
         formFirst.data.forEach((item)=>{
             if(item.isAddr === true){
-                mapForm.push({
-                    name: item.name,
-                    addr: Number(item.addr),
-                    val: 0
-                })
+                if(!mapForm.some(itemMap => (Number(itemMap.addr) === Number(item.addr)))){
+                    mapForm.push({
+                        addr: Number(item.addr),
+                        val: 0
+                    })
+                }
             }
         });
+
         // Concat mapMenu and mapForm
         const map = mapForm;
         mapMenu.forEach(itemMenu => {
-            if(!map.some(item => (item.addr === itemMenu.addr))){
+            if(!map.some(item => (Number(item.addr) === Number(itemMenu.addr)))){
                 map.push(itemMenu)  
             }
         })
 
         // Config map for form
-        this.props.mapInit(mapForm);
+        mapInit(mapForm);
         this.setState({ tab: 0 });
 
+        // this.getValueMap();
         this.interval = setInterval(() => {this.getValueMap()}, 250);
-    }
-
-    componentDidMount() {
-       // this.interval = setInterval(() => {this.getValueMap()}, 250);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
+    // read ModBus
     getValueMap = () => {
-        const {map} = this.props;
-        getValue(map, this.props.mapUpdate);        
+        const {map, mapUpdate} = this.props;
+        getValue(map, mapUpdate);        
     }
 
+    // toggle menu drawer
     toggleDrawer = () => {
         this.setState({ isOpen: !this.state.isOpen });
     };
 
+    // toggle this.state.form
     toggleContent = (index) => {
         // Select menu monitor from store        
-        const menu = this.props.form.find((item) => (item.tamplate === "monitorMenu"));
+        const menu = this.props.form.find((item) => (item.template === "monitorMenu"));
         this.setState({menu});
         const mapMenu = []
         menu.menu.forEach(itemMenu=>{
             if(itemMenu.isAddr){
                 mapMenu.push({
-                    name: itemMenu.name,
                     addr: Number(itemMenu.addr),
-                    val: 11
+                    val: 0
                 })
             }
         })
         // Select current form
-        const formFirst = this.state.form.find((item)=>(item.window_tab === index));
+        const formFirst = this.state.form.find((item)=>(Number(item.window_tab) === Number(index)));
 
         const mapForm = [];
         formFirst.data.forEach((item)=>{
             if(item.isAddr === true){
                 mapForm.push({
-                    name: item.name,
                     addr: Number(item.addr),
                     val: 0
                 })
@@ -144,7 +149,7 @@ class Monitor extends Component{
         // Concat mapMenu and mapForm
         const map = mapForm;
         mapMenu.forEach(itemMenu => {
-            if(!map.some(item => (item.addr === itemMenu.addr))){
+            if(!map.some(item => (Number(item.addr) === Number(itemMenu.addr)))){
                 map.push(itemMenu)  
             }
         })
@@ -155,17 +160,29 @@ class Monitor extends Component{
 
     render(){
         const { classes } = this.props;
+        const { tab, isOpen, form, menu } = this.state;
+        console.log(this.state)
         return (
             <div>
-                <StatusMenu open={this.state.isOpen} toggleDrawer={this.toggleDrawer}  menu={this.state.menu} />
-                <div className={this.state.isOpen ? classes.contanerOpen : classes.contanerClose}  > 
-                    <ToolBar open={this.state.isOpen} toggleContent={this.toggleContent} form={this.state.form} tab={this.state.tab} />
-                    <Content open={this.state.isOpen} form={this.state.form.find(item=>item.window_tab === this.state.tab)} />
+                <StatusMenu open={isOpen} toggleDrawer={this.toggleDrawer}  menu={menu} />
+                <div className={isOpen ? classes.containerOpen : classes.containerClose}  > 
+                    <ToolBar open={isOpen} toggleContent={this.toggleContent} form={form} tab={tab} />
+                    <ViewTemplate open={isOpen} data={form.find(item=>Number(item.window_tab) === Number(tab))}/>
                 </div>  
             </div>
     );
   }
 }
+
+
+Monitor.propTypes = {
+    map: PropTypes.array.isRequired,
+    classes: PropTypes.object.isRequired,
+    mapUpdate: PropTypes.func.isRequired,
+    mapInit: PropTypes.func.isRequired,
+    form: PropTypes.object.isRequired,
+    // style: PropTypes.object.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({ 
     mapInit: (val) => dispatch({type: NEW_MAP, map: val}),

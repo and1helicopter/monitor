@@ -16,7 +16,7 @@ import Card from '@material-ui/core/Card';
 
 
 
-const styles =  theme => ({
+const styles =  () => ({
     list:{
         "padding-bottom": "56px"
     },
@@ -42,7 +42,7 @@ const styles =  theme => ({
     },
 })
 
-class StatusBitTamplate extends Component{
+class StatusBitTemplate extends Component{
     state = {
         data: [],
         column: 1 
@@ -86,10 +86,6 @@ class StatusBitTamplate extends Component{
     }
 
     value(item){
-        console.log("item")
-        console.log(item)
-        console.log(this.props)
-
         const itemVal = this.props.map.find((mapItem)=>Number(mapItem.addr) === Number(item.addr));
         console.log(itemVal)
         if(itemVal === undefined) return;       
@@ -134,13 +130,13 @@ class StatusBitTamplate extends Component{
     }    
 }
 
-StatusBitTamplate.propTypes = {
+StatusBitTemplate.propTypes = {
     dictionary: PropTypes.object.isRequired,
     language: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     format: PropTypes.object.isRequired,
     map: PropTypes.array.isRequired,
-    // style: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({ 
@@ -154,4 +150,4 @@ const mapStateToProps = store => ({
     format:store.app.format,
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StatusBitTamplate))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StatusBitTemplate))

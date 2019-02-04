@@ -13,8 +13,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import EditFieldComponent from '../components/EditFieldComponent';
-import Datum from '../components/Monitor/Datum';
-
+import Datum from '../components/Datum';
+import { NEW_MAP, UPDATE_MAP } from '../actions/actions';
+import { getValue } from './ModBus';
 
 const styles =  theme => ({
     list:{
@@ -47,7 +48,7 @@ const styles =  theme => ({
 
 })
 
-class EditableTamplate extends Component{
+class ViewTemplate extends Component{
     state = {
         data: [],
         isEdit: false,
@@ -55,12 +56,14 @@ class EditableTamplate extends Component{
         isNormalize: true,
     }
 
-    componentWillMount(){
-        const dataTemp = this.props.data;
-        if(dataTemp.data === undefined) return;        
-        this.setState({data: dataTemp.data});
+    componentWillMount = () => {
+        const {data} = this.props;
+        if(data === undefined) return;        
+        this.setState({data: data.data});
+    }
 
-        // get new value modbus
+    componentWillUnmount = () => {
+
     }
 
     toggleEditOpen = (item) => {
@@ -84,10 +87,15 @@ class EditableTamplate extends Component{
     }
 
     dialogOk =(value, item) =>{
+        const {setValue} = this.props;
+
         console.log(value, item);
+        setValue(value, item);
 
         // set new value modbus
         this.toggleEditClose();
+
+
 
         // get new value modbus
 
@@ -102,7 +110,7 @@ class EditableTamplate extends Component{
     dialogOpen(item){
         // console.log(item)
         this.setState({ itemCurrent: item});
-        console.log(this.state)
+
         // this.setState({ valueDef: 15});
         // console.log(item)
 
@@ -123,14 +131,10 @@ class EditableTamplate extends Component{
         }
     }
 
+
     toggleDatum = () => {
         const {isNormalize} = this.state;
         this.setState({ isNormalize: !isNormalize });
-    };
-
-
-    toggleDatum = () => {
-        this.setState({ isNormalize: !this.state.isNormalize });
     };
 
     units(units){
@@ -146,13 +150,18 @@ class EditableTamplate extends Component{
         return f(value);
     }
 
-    formatBind(value, format){
+    formatBind(itemsBind, format){
+
+        // const {format} = ;
         const tempFormat = this.props.format[format];
         const f = new Function(tempFormat.arguments, tempFormat.direct);
         const args = tempFormat.arguments.toString().replace( /\s/g, '').split(',');
         const values = []
+        console.log(itemsBind)
+        console.log(args)
+
         args.forEach((arg)=>{
-            value.forEach(val=>{
+            itemsBind.forEach(val=>{
                 if(arg === val.bind){
                     values.push(val.val)
                 }
@@ -176,11 +185,13 @@ class EditableTamplate extends Component{
     }
 
     value(item){
+        const {map} = this.props;
+        const {isNormalize} = this.state;
         if(item.isAddr){
-            const itemVal = this.props.map.find((mapItem)=>
-                mapItem.name === item.name && Number(mapItem.addr) === Number(item.addr));
+            const itemVal = map.find((mapItem)=>
+                Number(mapItem.addr) === Number(item.addr));
             if(itemVal === undefined) return;
-            if(this.state.isNormalize){
+            if(isNormalize){
                 return itemVal.val; 
             }            
             return this.format(itemVal.val, item.format); 
@@ -188,46 +199,42 @@ class EditableTamplate extends Component{
         if(item.isBind){
             const itemBind = item.bind;
             const itemsBind = [];
+            // for each item binding  select value from map
+            // itemsBind = {bind: , addr: , val: }
             itemBind.forEach((element) => {
-                const key = Object.keys(element).toString();
+                const addrVal = Number(Object.values(element)); 
                 itemsBind.push(
-                    Object.assign({}, this.props.map.find((mapItem) => (mapItem.name === element[key]))));
+                    Object.assign({bind: Object.keys(element).toString()},map.find((mapItem) => (Number(mapItem.addr)===addrVal)))
+                );
             })
-            itemBind.forEach((element) => {
-                const key = Object.keys(element).toString();
-                itemsBind.forEach((itemVal) => {
-                    if(itemVal.name === element[key]){
-                        itemVal.bind = key;
-                    }
-                })
-            });
             return  this.formatBind(itemsBind, item.format);
         }
     }
 
     render(){
         const { classes, dictionary, language, data} = this.props;
-        console.log(this.props)
         return(
             <Provider  language={dictionary.language} translation={language}> 
                 <Grid container 
                     justify="center"
                     alignItems="flex-start"
                     spacing={8}
-                    className={classes.grid}>
-                    {this.state.data.map(itemData => 
-                    <Grid key={itemData.name}
-                        item 
-                        xs={6}                    >
-                            <Datum className={classes.datum}
-                                   name={itemData.name} 
-                                   value={this.value(itemData)} 
-                                   units={itemData.isUnits ? this.units(itemData.units) : Object('')} 
-                                   toggleDatum={this.toggleDatum}
-                                   isEditable = {true}
-                                   edit = {() => {this.toggleEditOpen(itemData)}}
-                               />
-                    </Grid> 
+                    className={classes.grid}
+                >
+                    {data.data.map(itemData => itemData.isVisible ?
+                        <Grid key={itemData.name}
+                            item 
+                            xs={6}                    
+                        >
+                                <Datum className={classes.datum}
+                                    name={itemData.name} 
+                                    value={this.value(itemData)} 
+                                    units={itemData.isUnits ? this.units(itemData.units) : Object('')} 
+                                    toggleDatum={this.toggleDatum}
+                                    isEditable = {itemData.isEditable}
+                                    edit = {itemData.isEditable ? () => {this.toggleEditOpen(itemData)} : ()=>{}}
+                                />
+                        </Grid> : <div key={itemData.name}/>
                     )}
                 </Grid>
                 <EditFieldComponent
@@ -241,17 +248,19 @@ class EditableTamplate extends Component{
     }    
 }
 
-EditableTamplate.propTypes = {
+ViewTemplate.propTypes = {
     dictionary: PropTypes.object.isRequired,
     language: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     format: PropTypes.object.isRequired,
     map: PropTypes.array.isRequired,
-    // style: PropTypes.object.isRequired,
+    setValue: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({ 
-
+    // mapInit: (val) => dispatch({type: NEW_MAP, map: val}),
+    // mapUpdate: (val) =>  dispatch({type: UPDATE_MAP, map: val})
 })
 
 const mapStateToProps = store => ({
@@ -261,4 +270,4 @@ const mapStateToProps = store => ({
     format:store.app.format,
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditableTamplate))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ViewTemplate))

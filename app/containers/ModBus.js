@@ -23,16 +23,11 @@ export const getValue  = async(oldMap, dispatch) => {
   try{
     const newMap = [];
 
-    // oldMap.forEach(itemMap => {
-
-    // });
-
     for(const itemMap of oldMap){
       const value = await getValueAsync(itemMap.addr);
       const tempObj = {
-        val: value,
+        val: Number(value),
         addr: itemMap.addr,
-        name: itemMap.name
       };
       newMap.push(tempObj);
     }
@@ -42,6 +37,10 @@ export const getValue  = async(oldMap, dispatch) => {
   catch(e){
     console.log(e);
   }
+}
+
+export const setValue = async(newValue, addr) => {
+  await client.writeRegisters(addr, newValue);
 }
 
 const getValueAsync = async(addr) => {

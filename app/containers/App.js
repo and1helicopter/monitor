@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BottomMenu from '../components/BottomMenu';
 import theme from '../themes/theme';
-import {InitModBusPort, getValueTest} from './ModBus';
+import {InitModBusPort} from './ModBus';
 
 const styles = {
     root: {

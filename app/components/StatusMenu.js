@@ -129,14 +129,14 @@ class StatusMenu extends Component{
                             key={itemMenu.name} 
                             className={classes.menuItem} 
                             component={itemMenu.isHandler ? Link : null}  
-                            to={itemMenu.isHandler ? `/ContainerForm/${itemMenu.name},${itemMenu.handler}`: null}
+                            to={itemMenu.isHandler ? `/ContainerTemplate/${itemMenu.name},${itemMenu.handler}`: null}
                         >
                             <ListItemIcon>
                                 <Badge 
                                     classes={{ badge: classes.badge }} 
                                     color="secondary" 
                                     variant="dot" 
-                                    badgeContent = {""}
+                                    badgeContent = ""
                                     invisible={itemMenu.isStatus ? this.badge(itemMenu) : true}
                                 >
                                     <Info/> 

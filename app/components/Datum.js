@@ -22,36 +22,38 @@ const styles =  () => ({
             "padding-top": "6px",
         }
     },
+    button:{
+        "&:last-child": {
+            "padding": "9px",
+        }
+    }
 });
 
 class Datum extends Component{
-
-
 
     render(){
         const { classes, dictionary, language, name, value, units, toggleDatum, isEditable, edit} = this.props;
         return (
             <Provider language={dictionary.language} translation={language} >
                 <Card 
-                    onClick={toggleDatum} 
-                    raised 
+                    
                 >
                     <CardContent className={classes.content}>
                         <Grid container >
-                            <Grid item xs={6}>
+                            <Grid item xs={isEditable ? 7 : 8} onClick={toggleDatum} >
                                 <Typography >
                                     <Translate text={name}/>
                                 </Typography>
                             </Grid>
-                            <Grid item xs>
+                            <Grid item xs onClick={toggleDatum} >
                                 <Typography color="textSecondary">
                                     {value} {units}                        
                                 </Typography>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={isEditable ? 2  : 0}>
                                 {isEditable ?
-                                    < IconButton onClick={edit}>
-                                        <ArrowForward / >
+                                    <IconButton className={classes.button} onClick={edit}>
+                                        <ArrowForward fontSize="small"/ >
                                     </IconButton>:null
                                 }
                             </Grid>

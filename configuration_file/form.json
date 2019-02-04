@@ -1,7 +1,7 @@
 [
     {
         "name":"monitorMenu",
-        "tamplate": "monitorMenu",
+        "template": "monitorMenu",
         "menu": [
             {
                 "type": "status",
@@ -47,7 +47,7 @@
     },
     {
         "name":"first_monitor_window",
-        "tamplate": "monitorData",
+        "template": "monitorData",
         "window_tab": 0,
         "style":{
             "column": "2"
@@ -59,8 +59,8 @@
                 "format": "AddBind",
                 "isBind": true,
                 "bind": [
-                    {"val1": "value1"},
-                    {"val2": "value2"}
+                    {"val1": "269"},
+                    {"val2": "0x0270"}
                 ],
                 "isAddr": false,
                 "addr": null,
@@ -159,7 +159,7 @@
     },
     {
         "name":"second_monitor_window",
-        "tamplate": "monitorData",
+        "template": "monitorData",
         "window_tab": 1,
         "style":{
             "row": "2",
@@ -188,12 +188,23 @@
                 "addr": "0x0272",
                 "isUnits": true,
                 "units": "A"
-            }
+            },
+            {
+                "name": "value8",
+                "isVisible": true, 
+                "format": "xxx",
+                "isBind": false,
+                "bind": null,
+                "isAddr": true,
+                "addr": "269",
+                "isUnits": true,
+                "units": "A"
+            }    
         ]
     },
     {
         "name":"status_menu_3",
-        "tamplate": "statusBitTamplate",
+        "template": "statusBitTemplate",
         "style":{
             "column": 2
         },
@@ -202,25 +213,25 @@
                 "name": "text111",
                 "format": "bit0x0001",
                 "isAddr": true,
-                "addr": "0x0272"
+                "addr": "269"
             },
             {
                 "name": "text222",
                 "format": "bit0x0002",
                 "isAddr": true,
-                "addr": "0x0272"
+                "addr": "269"
             },
             {
                 "name": "text333",
                 "format": "bit0x0001",
                 "isAddr": true,
-                "addr": "0x0273"
+                "addr": "269"
             },
             {
                 "name": "text4",
                 "format": "bit0x0001",
                 "isAddr": true,
-                "addr": "0x0273"
+                "addr": "269"
             },
             {
                 "name": "text5",
@@ -316,7 +327,7 @@
     },
     {
         "name":"setting",
-        "tamplate":"settingTamplate",
+        "template":"settingTemplate",
         "style":{},
         "item":[
             {
@@ -332,7 +343,7 @@
     },
     {
         "name":"settingForm_1",
-        "tamplate": "statusTamplate",
+        "template": "statusTemplate",
         "style":{},
         "data":[
             {
@@ -381,7 +392,7 @@
     },
     {
         "name":"settingForm_2",
-        "tamplate": "statusTamplate",
+        "template": "statusTemplate",
         "data":[]
     }
 ]
