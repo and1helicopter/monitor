@@ -89,7 +89,6 @@ class ViewTemplate extends Component{
     dialogOk =(value, item) =>{
         const {setValue} = this.props;
 
-        console.log(value, item);
         setValue(value, item);
 
         // set new value modbus
@@ -157,9 +156,6 @@ class ViewTemplate extends Component{
         const f = new Function(tempFormat.arguments, tempFormat.direct);
         const args = tempFormat.arguments.toString().replace( /\s/g, '').split(',');
         const values = []
-        console.log(itemsBind)
-        console.log(args)
-
         args.forEach((arg)=>{
             itemsBind.forEach(val=>{
                 if(arg === val.bind){

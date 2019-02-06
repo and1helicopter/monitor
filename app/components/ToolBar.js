@@ -18,7 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const styles = theme => ({
+const styles = () => ({
     appBar: {
         height: 48
     },
@@ -38,6 +38,10 @@ const styles = theme => ({
     dialogTitle: {
         padding: "4px 50px 4px"
     },
+    text: {
+        "width": "90%",
+        "text-align": "center",
+    }
 })
 
 function SimpleDialog(props) {
@@ -98,7 +102,7 @@ class ToolBar extends Component{
             <Provider language={dictionary.language} translation={language}>
                 <AppBar color="inherit" position="static" className={classes.appBar} >
                     <Toolbar variant="dense" >
-                        <Typography variant="h6" color="inherit">
+                        <Typography variant="h6" color="inherit" className={classes.text}>
                             <Translate text={this.title()}/>
                         </Typography>  
                         <div className={classes.button}> 

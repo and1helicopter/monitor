@@ -48,5 +48,13 @@
     "status_3":{
         "en": "Status 3333",
         "ru": "Статус 3333"
+    },
+    "setting":{
+        "en": "Settings",
+        "ru": "Параметры"
+    },
+    "setting1":{
+        "en": "Settings xxx",
+        "ru": "Параметры xxx"
     }
 }  

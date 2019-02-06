@@ -106,7 +106,10 @@ class Monitor extends Component{
     }
 
     componentWillUnmount() {
+        const {mapInit} = this.props;
+
         clearInterval(this.interval);
+        // mapInit([]);
     }
 
     // read ModBus

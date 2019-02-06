@@ -24,8 +24,9 @@ export default class Root extends Component<Props>  {
           <App>
             <Switch>
               <Route path="/ContainerTemplate/:name,:ref" component={ContainerTemplate}/>
-              <Route path="/Test" component={Test}/>              
-              <Route path="/SettingsTemplate" component={SettingsTemplate}/>
+              <Route path="/Test" component={Test}/>      
+              {/* <Route path="/SettingsTemplate" component={SettingsTemplate}/>         */}
+              <Route path="/SettingsTemplate/:name,:ref" component={SettingsTemplate} />
               <Route exact path="/MonitorTemplate" component={MonitorTemplate}/>
               <Redirect from="/" to="/MonitorTemplate"/>
             </Switch>

@@ -8,6 +8,7 @@ import { getValue, setValue } from './ModBus';
 // Templates
 import ViewBitTemplate from './ViewBitTemplate';
 import ViewTemplate from './ViewTemplate';
+import SettingsTemplate from './SettingsTemplate';
 
 const styles =  () => ({
 
@@ -19,7 +20,7 @@ class ContainerTemplate extends Component{
         form: {}
     }
 
-    componentWillMount(){
+    componentWillMount() {
         const {form, mapInit, match} = this.props;
         // Select ref 
         const refTemp = match.params.ref;
@@ -49,16 +50,16 @@ class ContainerTemplate extends Component{
         mapInit(mapForm);
         
         // get new value modbus
-    //    this.interval = setInterval(() => {this.getValueMap()}, 250);
-         this.timeout = setTimeout(() => {this.getValueMap()}, 0);
+        //    this.interval = setInterval(() => {this.getValueMap()}, 250);
+        this.timeout = setTimeout(() => {this.getValueMap()}, 0);
     }
     
     componentWillUnmount() {
-        clearTimeout(this.timeout)
-        // clearInterval(this.interval);
-    }
+        const {mapInit} = this.props;
 
-    
+        clearTimeout(this.timeout)
+        // mapInit([]);
+    }
 
     // read ModBus
     getValueMap = () => {
@@ -67,7 +68,6 @@ class ContainerTemplate extends Component{
     }
 
     setValueMap = (value, item) => {
-        console.log(value, item);
         const addr = Number(item.addr);
         setValue([value], addr)
         this.timeout = setTimeout(() => {this.getValueMap()}, 0);
@@ -81,6 +81,8 @@ class ContainerTemplate extends Component{
                 return <ViewBitTemplate data={form}/>
             case "statusTemplate".toLowerCase():
                 return <ViewTemplate data={form} setValue={this.setValueMap}/>
+            // case "settingTemplate".toLowerCase():
+            //     return <SettingsTemplate form={form} nameItem={form.name}/>
             default:
                 return null;
         }
@@ -88,17 +90,15 @@ class ContainerTemplate extends Component{
 
     render(){
         const {match} = this.props;
-
+        console.log(this.props)
         return(<div>
-            <ToolBarWithBack name={match.params.name} />
+            <ToolBarWithBack name={match.params.name}/>
             {this.link()}
         </div>)
     }    
 }
 
 ContainerTemplate.propTypes = {
-    data: PropTypes.object.isRequired,
-    format: PropTypes.object.isRequired,
     map: PropTypes.array.isRequired,
     classes: PropTypes.object.isRequired,
     mapUpdate: PropTypes.func.isRequired,

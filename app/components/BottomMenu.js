@@ -66,7 +66,7 @@ class BottomMenu extends Component{
                         />
                         <BottomNavigationAction 
                             component={Link} 
-                            to="/SettingsTemplate"
+                            to="/SettingsTemplate/:name,:ref"
                             className="bottomNavigationAction" 
                             label={<Translate text="settings" />} 
                             icon={<SettingsIcon />} 

@@ -35,7 +35,7 @@ export const getValue  = async(oldMap, dispatch) => {
     dispatch(newMap);
   }
   catch(e){
-    console.log(e);
+    // console.log(e);
   }
 }
 

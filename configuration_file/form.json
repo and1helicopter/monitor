@@ -337,6 +337,22 @@
             {
                 "name":"setting_2",
                 "handler": "settingForm_2"
+            },
+            {
+                "name":"setting_3",
+                "handler": "setting1"
+            }
+        ]
+
+    },
+    {
+        "name":"setting1",
+        "template":"settingTemplate",
+        "style":{},
+        "item":[
+            {
+                "name":"setting_1",
+                "handler": "settingForm_3"
             }
         ]
 
@@ -394,5 +410,32 @@
         "name":"settingForm_2",
         "template": "statusTemplate",
         "data":[]
+    },
+    {
+        "name":"settingForm_3",
+        "template": "statusTemplate",
+        "data":[
+            {
+                "name": "value1",
+                "isVisible": true,
+                "format": "add1xxxxx",
+                "isBind": false,
+                "bind": null,
+                "isAddr": true,
+                "addr": "0x0269",
+                "isEditable": true,
+                "editable": {
+                    "isNegative": true,
+                    "isFloat": false,
+                    "isLimits": true,
+                    "limit": {
+                        "min": 10,
+                        "max": 255
+                    }
+                },
+                "isUnits": true,
+                "units": "kA"
+            }
+        ]
     }
 ]

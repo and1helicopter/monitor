@@ -14,12 +14,16 @@ import Typography from '@material-ui/core/Typography';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import IconButton from '@material-ui/core/IconButton';
 
-const styles = theme => ({
+const styles = () => ({
     button: {
         left: 0,
         marginLeft: -10,
         marginRight: 10,
     },
+    text: {
+        "width": "90%",
+        "text-align": "center",
+    }
 })
 
 class ToolBarWithBack extends Component{
@@ -28,19 +32,21 @@ class ToolBarWithBack extends Component{
     }
 
     render(){
-        const { classes, dictionary, language} = this.props;  
-        console.log(this.props)
+        const { classes, dictionary, language, isBack } = this.props;  
         return(
             <Provider language={dictionary.language} translation={language}>
                 <AppBar position="static" color="inherit" className={classes.appBar} >
                     <Toolbar variant="dense" >
-                        <IconButton aria-haspopup="true" onClick={this.context.router.history.goBack} color="inherit" className={classes.button}>
-                            <ChevronLeft />
-                        </IconButton>    
-                        <Typography variant="h6" color="inherit">
-                            <Translate text={this.props.name}/>
-                        </Typography>  
+                        {
+                            isBack === false ? null :
+                            <IconButton aria-haspopup="true" onClick={this.context.router.history.goBack} color="inherit" className={classes.button}>
+                                <ChevronLeft />
+                            </IconButton>
+                        }
 
+                        <Typography variant="h6" color="inherit" className={classes.text}>
+                            <Translate text={this.props.name}/>
+                        </Typography> 
                     </Toolbar>
                 </AppBar>
             </Provider>
@@ -51,6 +57,8 @@ class ToolBarWithBack extends Component{
 ToolBarWithBack.propTypes = {
     dictionary: PropTypes.object.isRequired,
     language: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
+    isBack: PropTypes.bool.isRequired,
 };
   
 const mapStateToProps = store => ({

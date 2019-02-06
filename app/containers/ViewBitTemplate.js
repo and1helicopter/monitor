@@ -87,7 +87,6 @@ class StatusBitTemplate extends Component{
 
     value(item){
         const itemVal = this.props.map.find((mapItem)=>Number(mapItem.addr) === Number(item.addr));
-        console.log(itemVal)
         if(itemVal === undefined) return;       
         return this.format(itemVal.val, item.format); 
     }
