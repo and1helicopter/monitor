@@ -40,7 +40,7 @@ class Datum extends Component{
                 >
                     <CardContent className={classes.content}>
                         <Grid container >
-                            <Grid item xs={isEditable ? 7 : 8} onClick={toggleDatum} >
+                            <Grid item xs={7} onClick={toggleDatum} >
                                 <Typography >
                                     <Translate text={name}/>
                                 </Typography>

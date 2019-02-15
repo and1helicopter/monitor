@@ -24,10 +24,11 @@ export const getValue  = async(oldMap, dispatch) => {
     const newMap = [];
 
     for(const itemMap of oldMap){
-      const value = await getValueAsync(itemMap.addr);
+      const value = await getValueAsync(itemMap.addr, itemMap.count);
       const tempObj = {
         val: Number(value),
         addr: itemMap.addr,
+        count: itemMap.count
       };
       newMap.push(tempObj);
     }
@@ -43,8 +44,19 @@ export const setValue = async(newValue, addr) => {
   await client.writeRegisters(addr, newValue);
 }
 
-const getValueAsync = async(addr) => {
-  const response =  await client.readHoldingRegisters(addr, 1);
-  return response.data[0];
+const getValueAsync = async(addr, count) => {
+  const response =  await client.readHoldingRegisters(addr, count);
+  let answer = 0;
+  switch (count) {
+    case 2:
+      answer = response.data[0] << 16;
+      answer += response.data[1];
+      break;  
+    default:
+      answer = response.data[0];
+      break;
+  }
+
+  return answer;
 }
 

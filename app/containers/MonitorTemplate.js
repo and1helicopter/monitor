@@ -65,7 +65,8 @@ class Monitor extends Component{
             if(itemMenu.isAddr){
                 mapMenu.push({
                     addr: Number(itemMenu.addr),
-                    val: 0
+                    val: 0,
+                    count: 1
                 })
             }
         })
@@ -83,7 +84,8 @@ class Monitor extends Component{
                 if(!mapForm.some(itemMap => (Number(itemMap.addr) === Number(item.addr)))){
                     mapForm.push({
                         addr: Number(item.addr),
-                        val: 0
+                        val: 0,
+                        count: item.count !== undefined ? item.count : 1
                     })
                 }
             }
@@ -133,7 +135,8 @@ class Monitor extends Component{
             if(itemMenu.isAddr){
                 mapMenu.push({
                     addr: Number(itemMenu.addr),
-                    val: 0
+                    val: 0,
+                    count: 1
                 })
             }
         })
@@ -145,7 +148,8 @@ class Monitor extends Component{
             if(item.isAddr === true){
                 mapForm.push({
                     addr: Number(item.addr),
-                    val: 0
+                    val: 0,
+                    count: item.count !== undefined ? item.count : 1
                 })
             }
         });

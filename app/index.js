@@ -7,7 +7,7 @@ import {  store, history } from './store/configureStore';
 // import Base from "./containers/Base";
 // import './app.global.css';
 
-//const store = configureStore();
+// const store = configureStore();
 // store={store} history={history}
 // const store = configureStore();
 // store={store} history={history}

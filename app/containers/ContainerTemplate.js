@@ -40,7 +40,8 @@ class ContainerTemplate extends Component{
                 if(!mapForm.some(item => Number(item.addr) === Number(itemData.addr))){
                     mapForm.push({
                         addr: Number(itemData.addr),
-                        val: 0
+                        val: 0,
+                        count: itemData.count !== undefined ? itemData.count : 1
                     })
                 }
             }
@@ -92,7 +93,7 @@ class ContainerTemplate extends Component{
         const {match} = this.props;
         console.log(this.props)
         return(<div>
-            <ToolBarWithBack name={match.params.name}/>
+            <ToolBarWithBack name={match.params.name} />
             {this.link()}
         </div>)
     }    

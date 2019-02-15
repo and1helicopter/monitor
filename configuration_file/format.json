@@ -1,9 +1,29 @@
 {
-    "add10": {"arguments":"val","direct":"return val + 10;", "inverse":"return val - 10;"},
-    "add15": {"arguments":"val","direct":"return val + 15;", "inverse":"return val - 15;"},
-    "AddBind": {"arguments":"val2, val1","direct":"return (Math.sin(10000/val1 + val2)).toFixed(4);"},
-    "bit0x0001": {"arguments":"val","direct":"return (0x0001 & val) > 0"},
-    "bit0x0002": {"arguments":"val","direct":"return (0x0002 & val) > 0"},
-    "xxx": {"arguments":"val","direct":"return (10000/val).toFixed(4)"},
-    "add1xxxxx": {"arguments":"val","direct":"return (val + 1)/100000;", "inverse":"return val * 100000 - 1;"}
+	"add10": {
+		"arguments": "val",
+		"direct": "return val + 10;",
+		"inverse": "return val - 10;"
+	},
+	"add15": {
+		"arguments": "val",
+		"direct": "return val + 15;",
+		"inverse": "return val - 15;"
+	},
+	"AddBind": {
+		"arguments": "val2, val1",
+		"direct": "return (Math.sin(10000/val1 + val2)).toFixed(4);"
+	},
+	"bit0x0001": { "arguments": "val", "direct": "return (0x0001 & val) > 0" },
+	"bit0x0002": { "arguments": "val", "direct": "return (0x0002 & val) > 0" },
+	"xxx": { "arguments": "val", "direct": "return (10000/val).toFixed(4)" },
+	"norm": {
+		"arguments": "val",
+		"direct": "return ((val/65535)*100).toFixed(4);",
+		"inverse": "return ((val/100)*65535);"
+	},
+	"add1xxxxx": {
+		"arguments": "val",
+		"direct": "return (val + 1)/10;",
+		"inverse": "return val * 10 - 1;"
+	}
 }

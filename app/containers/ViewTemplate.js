@@ -91,13 +91,7 @@ class ViewTemplate extends Component{
 
         setValue(value, item);
 
-        // set new value modbus
         this.toggleEditClose();
-
-
-
-        // get new value modbus
-
     }
 
     dialogClose =() =>{
@@ -136,22 +130,30 @@ class ViewTemplate extends Component{
         this.setState({ isNormalize: !isNormalize });
     };
 
-    units(units){
+    units(itemData){
         if(this.state.isNormalize){
-            return Object("%");
+            if(itemData.isNormalize === true) return Object(itemData.normalize);
         }
-        return <Translate text={units}/>;        
+        if(itemData.isUnits === true)  return <Translate text={itemData.units}/>;
+        return Object('');        
     }
 
-    format(value, format){
-        const tempFormat = this.props.format[format];
+    format(value, formatName){
+        const {format} = this.props;
+        const tempFormat = format[formatName];        
+        const f = new Function(tempFormat.arguments, tempFormat.direct);
+        return f(value);
+    }
+
+    normalize(value, normalizeName){
+        const {format} = this.props;
+        const tempFormat = format[normalizeName];
         const f = new Function(tempFormat.arguments, tempFormat.direct);
         return f(value);
     }
 
     formatBind(itemsBind, format){
 
-        // const {format} = ;
         const tempFormat = this.props.format[format];
         const f = new Function(tempFormat.arguments, tempFormat.direct);
         const args = tempFormat.arguments.toString().replace( /\s/g, '').split(',');
@@ -187,9 +189,13 @@ class ViewTemplate extends Component{
             const itemVal = map.find((mapItem)=>
                 Number(mapItem.addr) === Number(item.addr));
             if(itemVal === undefined) return;
-            if(isNormalize){
-                return itemVal.val; 
-            }            
+            console.log("itemVal")
+            console.log(itemVal)
+            if(item.formatNormalize !== undefined){
+                if(isNormalize){
+                   return this.normalize(itemVal.val, item.formatNormalize); 
+                }    
+            }        
             return this.format(itemVal.val, item.format); 
         }
         if(item.isBind){
@@ -209,6 +215,7 @@ class ViewTemplate extends Component{
 
     render(){
         const { classes, dictionary, language, data} = this.props;
+        const { itemCurrent, isEdit, isNormalize} = this.state;
         return(
             <Provider  language={dictionary.language} translation={language}> 
                 <Grid container 
@@ -225,7 +232,7 @@ class ViewTemplate extends Component{
                                 <Datum className={classes.datum}
                                     name={itemData.name} 
                                     value={this.value(itemData)} 
-                                    units={itemData.isUnits ? this.units(itemData.units) : Object('')} 
+                                    units={this.units(itemData)} 
                                     toggleDatum={this.toggleDatum}
                                     isEditable = {itemData.isEditable}
                                     edit = {itemData.isEditable ? () => {this.toggleEditOpen(itemData)} : ()=>{}}
@@ -234,10 +241,11 @@ class ViewTemplate extends Component{
                     )}
                 </Grid>
                 <EditFieldComponent
-                        open={this.state.isEdit}
+                        open={isEdit}
                         dialogClose={this.dialogClose} 
                         dialogOk={(value, item) => {this.dialogOk(value, item)}}
-                        itemData={this.state.itemCurrent}
+                        itemData={itemCurrent}
+                        isNormalized = {itemCurrent.isNormalize && isNormalize}
                 />
             </Provider>
         )

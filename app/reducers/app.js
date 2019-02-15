@@ -27,6 +27,6 @@ export default function app() {
         lang: lang(langState, {}),
         config: config(configState, {}),
         form: form(formState, {}),
-        format: format(formatState, {})
+        format: format(formatState, {}),
     };
 }

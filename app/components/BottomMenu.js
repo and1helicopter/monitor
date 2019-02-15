@@ -52,7 +52,7 @@ class BottomMenu extends Component{
                     >
                         <BottomNavigationAction 
                             component={Link} 
-                            to="/Test"
+                            to="/JournalTemplate"
                             label={<Translate text="journal" />}
                             className="bottomNavigationAction" 
                             icon={<RestoreIcon />}

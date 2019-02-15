@@ -1,441 +1,495 @@
 [
-    {
-        "name":"monitorMenu",
-        "template": "monitorMenu",
-        "menu": [
-            {
-                "type": "status",
-                "name": "status_1",
-                "isStatus": true,
-                "isAddr": true,
-                "addr": "0x0113",
-                "format": "bit0x0001",
-                "isHandler": false,
-                "handler": null
-            },
-            {
-                "type": "status",
-                "name": "status_2",
-                "isStatus": false,
-                "isAddr": false,
-                "addr": null,
-                "format": null,
-                "isHandler": false,
-                "handler": null
-            },
-            {
-                "type": "status",
-                "name": "status_3",
-                "isStatus": true,
-                "isAddr": true,
-                "addr": "0x0112",
-                "format": "bit0x0001",
-                "isHandler": true,
-                "handler": "status_menu_3"
-            },
-            {
-                "type": "status",
-                "name": "status_4",
-                "isStatus": true,
-                "isAddr": true,
-                "addr": "0x0270",
-                "format": "bit0x0001",
-                "isHandler": false,
-                "handler": null
-            }
-        ]
-    },
-    {
-        "name":"first_monitor_window",
-        "template": "monitorData",
-        "window_tab": 0,
-        "style":{
-            "column": "2"
-        },
-        "data": [
-            {
-                "name": "Inbox",
-                "isVisible": true, 
-                "format": "AddBind",
-                "isBind": true,
-                "bind": [
-                    {"val1": "269"},
-                    {"val2": "0x0270"}
-                ],
-                "isAddr": false,
-                "addr": null,
-                "isUnits": false,
-                "units": "kV"
-            },
-            {
-                "name": "value1",
-                "isVisible": true,
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0269",
-                "isUnits": true,
-                "units": "kA"
-            },
-            {
-                "name": "value2",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0270",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value3",
-                "isVisible": false, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0271",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value4",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0272",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value5",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0274",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value6",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0275",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value7",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "269",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value8",
-                "isVisible": true, 
-                "format": "xxx",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "269",
-                "isUnits": true,
-                "units": "A"
-            }             
-        ]
-    },
-    {
-        "name":"second_monitor_window",
-        "template": "monitorData",
-        "window_tab": 1,
-        "style":{
-            "row": "2",
-            "column": "2",
-            "alignment": "vertical"
-        },
-        "data": [
-            {
-                "name": "value1",
-                "isVisible": false, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0271",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value2",
-                "isVisible": true, 
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0272",
-                "isUnits": true,
-                "units": "A"
-            },
-            {
-                "name": "value8",
-                "isVisible": true, 
-                "format": "xxx",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "269",
-                "isUnits": true,
-                "units": "A"
-            }    
-        ]
-    },
-    {
-        "name":"status_menu_3",
-        "template": "statusBitTemplate",
-        "style":{
-            "column": 2
-        },
-        "data": [
-            {
-                "name": "text111",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "269"
-            },
-            {
-                "name": "text222",
-                "format": "bit0x0002",
-                "isAddr": true,
-                "addr": "269"
-            },
-            {
-                "name": "text333",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "269"
-            },
-            {
-                "name": "text4",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "269"
-            },
-            {
-                "name": "text5",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text6",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text7",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text8",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text9",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text10",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text11",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text12",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text13",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text14",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text15",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text16",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text17",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text18",
-                "format": "bit0x0001",
-                "isAddr": true,
-                "addr": "0x0273"
-            },
-            {
-                "name": "text19",
-                "format": "bit0x0002",
-                "isAddr": true,
-                "addr": "0x0273"
-            }
-        ]
-    },
-    {
-        "name":"setting",
-        "template":"settingTemplate",
-        "style":{},
-        "item":[
-            {
-                "name":"setting_1",
-                "handler": "settingForm_1"
-            },
-            {
-                "name":"setting_2",
-                "handler": "settingForm_2"
-            },
-            {
-                "name":"setting_3",
-                "handler": "setting1"
-            }
-        ]
-
-    },
-    {
-        "name":"setting1",
-        "template":"settingTemplate",
-        "style":{},
-        "item":[
-            {
-                "name":"setting_1",
-                "handler": "settingForm_3"
-            }
-        ]
-
-    },
-    {
-        "name":"settingForm_1",
-        "template": "statusTemplate",
-        "style":{},
-        "data":[
-            {
-                "name": "value1",
-                "isVisible": true,
-                "format": "add10",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0269",
-                "isEditable": true,
-                "editable": {
-                    "isNegative": true,
-                    "isFloat": false,
-                    "isLimits": true,
-                    "limit": {
-                        "min": 10,
-                        "max": 255
-                    }
-                },
-                "isUnits": true,
-                "units": "kA"
-            },
-            {
-                "name": "value2",
-                "isVisible": true,
-                "format": "add15",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0279",
-                "isEditable": true,
-                "editable": {
-                    "isNegative": true,
-                    "isFloat": false,
-                    "isLimits": true,
-                    "limit": {
-                        "min": 5,
-                        "max": 2355
-                    }
-                },
-                "isUnits": true,
-                "units": "kA"
-            }
-        ]
-    },
-    {
-        "name":"settingForm_2",
-        "template": "statusTemplate",
-        "data":[]
-    },
-    {
-        "name":"settingForm_3",
-        "template": "statusTemplate",
-        "data":[
-            {
-                "name": "value1",
-                "isVisible": true,
-                "format": "add1xxxxx",
-                "isBind": false,
-                "bind": null,
-                "isAddr": true,
-                "addr": "0x0269",
-                "isEditable": true,
-                "editable": {
-                    "isNegative": true,
-                    "isFloat": false,
-                    "isLimits": true,
-                    "limit": {
-                        "min": 10,
-                        "max": 255
-                    }
-                },
-                "isUnits": true,
-                "units": "kA"
-            }
-        ]
-    }
+	{
+		"name": "monitorMenu",
+		"template": "monitorMenu",
+		"menu": [
+			{
+				"type": "status",
+				"name": "status_1",
+				"isStatus": true,
+				"isAddr": true,
+				"addr": "0x0113",
+				"format": "bit0x0001",
+				"isHandler": false,
+				"handler": null
+			},
+			{
+				"type": "status",
+				"name": "status_2",
+				"isStatus": false,
+				"isAddr": false,
+				"addr": null,
+				"format": null,
+				"isHandler": false,
+				"handler": null
+			},
+			{
+				"type": "status",
+				"name": "status_3",
+				"isStatus": true,
+				"isAddr": true,
+				"addr": "0x0112",
+				"format": "bit0x0001",
+				"isHandler": true,
+				"handler": "status_menu_3"
+			},
+			{
+				"type": "status",
+				"name": "status_4",
+				"isStatus": true,
+				"isAddr": true,
+				"addr": "0x0270",
+				"format": "bit0x0001",
+				"isHandler": false,
+				"handler": null
+			}
+		]
+	},
+	{
+		"name": "first_monitor_window",
+		"template": "monitorData",
+		"window_tab": 0,
+		"style": {
+			"column": "2"
+		},
+		"data": [
+			{
+				"name": "Inbox",
+				"isVisible": true,
+				"format": "AddBind",
+				"isBind": true,
+				"bind": [{ "val1": "269" }, { "val2": "0x0270" }],
+				"isAddr": false,
+				"addr": null,
+				"isUnits": false,
+				"units": "kV"
+			},
+			{
+				"name": "value1",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0269",
+				"isUnits": true,
+				"units": "kA",
+				"count": 1
+			},
+			{
+				"name": "value2",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0270",
+				"isUnits": true,
+				"units": "A",
+				"count": 2
+			},
+			{
+				"name": "value3",
+				"isVisible": false,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0271",
+				"isUnits": true,
+				"units": "A",
+				"count": 2
+			},
+			{
+				"name": "value4",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0272",
+				"isUnits": true,
+				"units": "A"
+			},
+			{
+				"name": "value5",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0274",
+				"isUnits": true,
+				"units": "A"
+			},
+			{
+				"name": "value6",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "268",
+				"isUnits": true,
+				"units": "A",
+				"count": 2
+			},
+			{
+				"name": "value7",
+				"isVisible": true,
+				"format": "add10",
+				"formatNormalize": "xxx",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "269",
+				"isUnits": true,
+				"units": "A",
+				"isNormalize": true,
+				"normalize": "%"
+			},
+			{
+				"name": "value9",
+				"isVisible": true,
+				"format": "add10",
+				"formatNormalize": "xxx",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "267",
+				"isUnits": true,
+				"units": "A",
+				"isNormalize": true,
+				"normalize": "%",
+				"count": 2
+			},
+			{
+				"name": "value8",
+				"isVisible": true,
+				"format": "xxx",
+				"formatNormalize": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "269",
+				"isUnits": true,
+				"units": "A",
+				"isNormalize": true,
+				"normalize": "%"
+			}
+		]
+	},
+	{
+		"name": "second_monitor_window",
+		"template": "monitorData",
+		"window_tab": 1,
+		"style": {
+			"row": "2",
+			"column": "2",
+			"alignment": "vertical"
+		},
+		"data": [
+			{
+				"name": "value1",
+				"isVisible": false,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0271",
+				"isUnits": true,
+				"units": "A"
+			},
+			{
+				"name": "value2",
+				"isVisible": true,
+				"format": "add10",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0272",
+				"isUnits": true,
+				"units": "A"
+			},
+			{
+				"name": "value8",
+				"isVisible": true,
+				"format": "xxx",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "269",
+				"isUnits": true,
+				"units": "A"
+			}
+		]
+	},
+	{
+		"name": "status_menu_3",
+		"template": "statusBitTemplate",
+		"style": {
+			"column": 2
+		},
+		"data": [
+			{
+				"name": "text111",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "269"
+			},
+			{
+				"name": "text222",
+				"format": "bit0x0002",
+				"isAddr": true,
+				"addr": "269"
+			},
+			{
+				"name": "text333",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "269"
+			},
+			{
+				"name": "text4",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "269"
+			},
+			{
+				"name": "text5",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text6",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text7",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text8",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text9",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text10",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text11",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text12",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text13",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text14",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text15",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text16",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text17",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text18",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "0x0273"
+			},
+			{
+				"name": "text19",
+				"format": "bit0x0002",
+				"isAddr": true,
+				"addr": "0x0273"
+			}
+		]
+	},
+	{
+		"name": "setting",
+		"template": "settingTemplate",
+		"style": {},
+		"item": [
+			{
+				"name": "setting_1",
+				"handler": "settingForm_1"
+			},
+			{
+				"name": "setting_2",
+				"handler": "settingForm_2"
+			},
+			{
+				"name": "setting_3",
+				"handler": "setting1"
+			}
+		]
+	},
+	{
+		"name": "setting1",
+		"template": "settingTemplate",
+		"style": {},
+		"item": [
+			{
+				"name": "setting_1",
+				"handler": "settingForm_3"
+			}
+		]
+	},
+	{
+		"name": "settingForm_1",
+		"template": "statusTemplate",
+		"style": {},
+		"data": [
+			{
+				"name": "value1",
+				"isVisible": true,
+				"format": "add10",
+				"formatNormalize": "norm",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0269",
+				"isEditable": true,
+				"editable": {
+					"isNegative": true,
+					"isFloat": false
+				},
+				"isLimits": true,
+				"limit": {
+					"units": {
+						"min": 10,
+						"max": 255
+					},
+					"normalize": {
+						"min": 0,
+						"max": 100
+					}
+				},
+				"isUnits": true,
+				"units": "kA",
+				"isNormalize": true,
+				"normalize": "%"
+			},
+			{
+				"name": "value2",
+				"isVisible": true,
+				"format": "add15",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0279",
+				"isEditable": true,
+				"editable": {
+					"isNegative": true,
+					"isFloat": false
+				},
+				"isLimits": true,
+				"limit": {
+					"units": {
+						"min": 5,
+						"max": 2355
+					}
+				},
+				"isUnits": true,
+				"units": "kA"
+			}
+		]
+	},
+	{
+		"name": "settingForm_2",
+		"template": "statusTemplate",
+		"data": []
+	},
+	{
+		"name": "settingForm_3",
+		"template": "statusTemplate",
+		"data": [
+			{
+				"name": "value1",
+				"isVisible": true,
+				"format": "add1xxxxx",
+				"isBind": false,
+				"bind": null,
+				"isAddr": true,
+				"addr": "0x0269",
+				"isEditable": true,
+				"editable": {
+					"isNegative": true,
+					"isFloat": false
+				},
+				"isLimits": true,
+				"limit": {
+					"units": {
+						"min": 10,
+						"max": 255
+					}
+				},
+				"isUnits": true,
+				"units": "kA"
+			}
+		]
+	},
+	{
+		"name": "journal",
+		"template": "journalTemplate",
+		"addr": "0x0080",
+		"toggleAddr": "0x0102",
+		"buffer": 128,
+		"size": 100,
+		"data": [
+			{
+				"name": "value1",
+				"isVisible": true,
+				"format": "add1xxxxx",
+				"isBind": false,
+				"bind": null,
+				"shift": 7,
+				"isUnits": true,
+				"units": "kA"
+			}
+		],
+		"Events": [{ "EventCode1": "0x0053" }, { "EventCode2": "0x0153" }]
+	}
 ]
