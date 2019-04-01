@@ -50,7 +50,8 @@ class Datum extends Component{
                                     {value} {units}                        
                                 </Typography>
                             </Grid>
-                            <Grid item xs={isEditable ? 2  : 0}>
+                            {/* SecondaryAction */}
+                            <Grid item xs={isEditable ? 2  : 0}>                                
                                 {isEditable ?
                                     <IconButton className={classes.button} onClick={edit}>
                                         <ArrowForward fontSize="small"/ >

@@ -7,6 +7,7 @@ import { NEW_MAP, UPDATE_MAP } from '../actions/actions';
 import { getValue, setValue } from './ModBus';
 // Templates
 import ViewBitTemplate from './ViewBitTemplate';
+import ViewListTemplate from './ViewListTemplate';
 import ViewTemplate from './ViewTemplate';
 import SettingsTemplate from './SettingsTemplate';
 
@@ -82,6 +83,8 @@ class ContainerTemplate extends Component{
                 return <ViewBitTemplate data={form}/>
             case "statusTemplate".toLowerCase():
                 return <ViewTemplate data={form} setValue={this.setValueMap}/>
+            case "listTemplate".toLowerCase():
+                return <ViewListTemplate data={form}/>
             // case "settingTemplate".toLowerCase():
             //     return <SettingsTemplate form={form} nameItem={form.name}/>
             default:

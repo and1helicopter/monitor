@@ -40,8 +40,8 @@
 				"isAddr": true,
 				"addr": "0x0270",
 				"format": "bit0x0001",
-				"isHandler": false,
-				"handler": null
+				"isHandler": true,
+				"handler": "status_menu_3"
 			}
 		]
 	},
@@ -222,6 +222,28 @@
 				"isUnits": true,
 				"units": "A"
 			}
+		]
+	},
+	{
+		"name": "status_menu_3",
+		"template": "listTemplate",
+		"data": [
+			{
+				"name": "status_bit_1",
+				"format": "bit0x0001",
+				"isAddr": true,
+				"addr": "269"
+			},
+			{
+				"name": "status_bit_2",
+				"format": "bit0x0002",
+				"isAddr": true,
+				"addr": "269"},
+			{
+				"name": "status_bit_3",
+				"format": "bit0x0004",
+				"isAddr": true,
+				"addr": "269"}
 		]
 	},
 	{

@@ -20,6 +20,8 @@ import Info from "@material-ui/icons/Info";
 import IconButton from "@material-ui/core/IconButton";
 import classNames from 'classnames';
 import Badge from '@material-ui/core/Badge';
+import Avatar from '@material-ui/core/Avatar';
+
 import { Link } from 'react-router-dom';
 
 const bottomMenuHeight = 56;
@@ -131,15 +133,18 @@ class StatusMenu extends Component{
                             to={itemMenu.isHandler ? `/ContainerTemplate/${itemMenu.name},${itemMenu.handler}`: null}
                         >
                             <ListItemIcon>
-                                <Badge 
-                                    classes={{ badge: classes.badge }} 
-                                    color="secondary" 
-                                    variant="dot" 
-                                    badgeContent = ""
-                                    invisible={itemMenu.isStatus ? this.badge(itemMenu) : true}
-                                >
-                                    <Info/> 
-                                </Badge>
+                                <Avatar >                               
+                                    <Badge 
+                                        classes={{ badge: classes.badge }} 
+                                        color="secondary" 
+                                        variant="dot" 
+                                        badgeContent = ""
+                                        invisible={itemMenu.isStatus ? this.badge(itemMenu) : true}
+                                    >
+                                        <Info/> 
+                                    </Badge>
+                                </Avatar>
+
                             </ListItemIcon>
                             <ListItemText>
                                 <Translate text={itemMenu.name}/>
